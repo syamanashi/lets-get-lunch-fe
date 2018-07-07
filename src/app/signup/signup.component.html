@@ -1,3 +1,32 @@
-<p>
-  signup works!
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4">
+      <form #form="ngForm" (ngSubmit)="signup(form.value)">
+        <div class="form-group">
+          <label for="username">username</label>
+          <input placeholder="Username" class="form-control" id="username" name="username" type="text" [(ngModel)]="user.username">
+        </div>
+
+        <div class="form-group">
+          <label for="password">password</label>
+          <input placeholder="Password" class="form-control" id="password" name="password" type="password" [(ngModel)]="user.password">
+        </div>
+
+        <div class="form-group">
+          <label>Dietary Preferences</label>
+          <div *ngFor="let pref of dietPreferences; let i = index;">
+            <label [for]="pref.name" class="checkbox-inline">
+                <input [id]="pref.name" name="preference" type="checkbox" (change)="onPrefCheck(i)">{{ pref.name }}
+            </label>
+          </div>
+        </div>
+
+        <div class="error alert alert-danger" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+        <div class="form-group">
+          <button class="btn btn-default" type="submit">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
